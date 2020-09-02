@@ -19,4 +19,12 @@ class AgendamentoController extends Controller
     public function create () {
         return view ('agendamento.create');
     }
+
+    public function login () {
+        return view ('agendamento.login');
+    }
+
+    public function usuarios () {
+        return view ('agendamento.usuarios');
+    }
 }

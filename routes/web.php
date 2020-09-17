@@ -1,13 +1,27 @@
 <?php
 
-// Visualização dos veículos
-Route::get('/agendamento', 'AgendamentoController@index' );
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+Route::get('/vagas', 'VagasController@index')
+->name('listar_vagas');
+Route::get('/vagas/criar', 'VagasController@create');
+Route::post('/vagas/criar', 'VagasController@store');
+Route::delete('/vagas/{id}', 'VagasController@destroy');
 
-// Agendar - Create é o nome do arquivo = create.blade.php
-Route::get('/agendamento/agendar', 'AgendamentoController@create' );
+Route::get('/home', 'HomeController@index')->name('home');
 
-// Login
-Route::get('/agendamento/login', 'AgendamentoController@login' );
+Auth::routes();
+Route::get('/entrar', 'EntrarController@index');
+Route::post('/entrar', 'EntrarController@entrar');
 
-// Lista de usuários
-Route::get('/agendamento/usuarios', 'AgendamentoController@usuarios' );
+// Somente admin tem o acesso
+Route::get('/registro', 'RegistroController@create');
+Route::post('/registro', 'RegistroController@store');

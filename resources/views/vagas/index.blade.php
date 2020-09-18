@@ -11,6 +11,7 @@ Agendamento de vagas
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
 body{
     margin-top:20px;
@@ -64,7 +65,6 @@ body{
   </style>
 </head>
 <body>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-xl-3">
@@ -105,47 +105,46 @@ body{
 	</div>
 </div>
 
+<div class="container">
 @if(!empty($mensagem))
     <div class="alert alert-success" role="alert">
         {{$mensagem}}
     </div>
 @endif
 <a href="/vagas/criar" class="btn btn-dark mb-2">Adicionar</a>
-
-<table class="table">
-  <thead class="table-primary">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Modelo</th>
-      <th scope="col">Placa</th>
-      <th scope="col">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td></td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@mdo</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@mdo</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+    <table class="table table-hover">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Placa</th>
+        <th scope="col">Data</th>
+        <th scope="col" colspan="2">Ações</th>
+        </tr>
+    </thead>
+    @foreach($vagas as $vaga)
+    <tbody>
+        <tr>
+            <th scope="row">{{ $vaga->id }}</th>
+            <td>{{ $vaga->nome }}</td>
+            <td>{{ $vaga->modelo }}</td>
+            <td>{{ $vaga->placa }}</td>
+            <td>{{ date( 'd/m/Y' , strtotime($vaga->data))}}</td>
+            <td>
+            <form method="post" action="/vagas/{{ $vaga->id }}"
+                onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($vaga->nome) }}?')">
+                <button class="btn btn-info btn-sm">Editar</button>
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm">Excluir</button>
+            </form>
+            </td>
+        </tr>
+    </tbody>
+    @endforeach
+    </table>
+</div>
 
 <!-- <ul class="list-group">
     @foreach($vagas as $vaga)

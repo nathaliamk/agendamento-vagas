@@ -89,7 +89,7 @@ body{
             <div class="card bg-c-pink order-card btn btn-dark mb-2">
                 <div class="card-block">
                     <h6 class="m-b-20">Vagas Ocupadas</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>0</span></h2>
+                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span> {{ $vagas_reservadas }} </span></h2>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ body{
             <div class="card bg-c-green order-card btn btn-dark mb-2">
                 <div class="card-block">
                     <h6 class="m-b-20">Vagas Disponíveis</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>0</span></h2>
+                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span> {{ $vagas_disponiveis }} </span></h2>
                 </div>
             </div>
         </div>

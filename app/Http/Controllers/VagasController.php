@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Vaga;
+use App\Estacionamento;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -13,20 +14,43 @@ class VagasController extends Controller
         $this->middleware('auth');
     }
     
-    public function index(Request $request) {
-        $vagas = Vaga::query()->orderBy('nome')
-        ->get();
+    public function index(Request $request) 
+    {
+        $vagas = Vaga::query()->orderBy('nome')->get();
+
         $mensagem = $request->session()->get('mensagem');
         
         //Consulta para pegar todas as vagas agendadas em um determinado dia
-        $vagas_reservadas = count($this->consultaVagasReservadas($request));
-        
-        //Esse numero 50 será substituido pelo total de vagas disponivel no estacionamento
-        $vagas_disponiveis = 50 - $vagas_reservadas;
-        // criar  uma nova tabela, para o estacionamento. Esta tabela terá:
-        // total de vagas, vagas_tipo1, vagas_tipo2, vagas_tipo3
+        $vagas_reservadas_no_dia = count($this->consultaVagasReservadas($request));
 
-        return view('vagas.index', compact('vagas', 'mensagem', 'vagas_reservadas', "vagas_disponiveis"));
+        //descer...
+        //isso aqui vai virar  um loop para pegar todos os possiveis estacionamentos. exemplo: estacionamento lateral,
+        //estacionamento principal, etc
+        $todas_vagas_agendadas = Vaga::where('estacionamento_id', 1)->get();
+        $placas = [];
+
+        //adicionando as placas dos agendamentos em um vetor para mostrar no frontend
+        // foreach($vagas_reservadas_no_dia as $agendamentos) {
+        //     array_push($placas, $agendamentos->placa);
+        // }
+
+        //pega as informações do Estacionamento
+        //TODO: extrair para um método privado auxiliar
+        $estacionamentos = Estacionamento::first();
+
+        $vagas_estacionamento = $estacionamentos->total_vagas;
+        $vagas_carros = $estacionamentos->vagas_tipo1;
+        $vagas_motos = $estacionamentos->vagas_tipo2;
+
+
+        $vagas_disponiveis = $vagas_estacionamento - $vagas_reservadas_no_dia;
+        $vagas_reservadas = $vagas_reservadas_no_dia;
+
+        //fazer essa pesquisa em loop, prreenchendo as datas futuras de uma semana pra frente
+        //um dia de cada vez, colocando tudo num vetor e retornando para o porteiro
+        //pode visualizar os agendamentos 
+
+        return view('vagas.index', compact('vagas', 'mensagem', 'vagas_reservadas', "vagas_disponiveis", "vagas_carros", "vagas_motos"));
     }
 
     private function consultaVagasReservadas($request) {
@@ -57,11 +81,39 @@ class VagasController extends Controller
             // 'placa' =>  'required'
             // 'data' =>  'required',
         ]);
+        
+        //TODO
+        //se o usuário entrar com uma data...
+        
+        // if($request->data) {
+        //     //parse com o carbon
+        //     //tipo isso aqui...
+        //     $request->data = Carbon::parse($request->data);
+
+        //     $vagas_agendadas = Vaga::where('data', $request->data);
+        //     $estacionamento = Estacionamento::first();
+            
+        //     if(count($vagas_agendadas) >= $estacionamento->total_vagas)
+        //         //não  lembro se a sintaxe é essa...
+        //         return redirect('/erro', compact('mensagem', 'Todas as vagas para este dia estão ocupadas!'));
+        //     } 
+
+        //     if(count($vagas_agendadas->vaga_tipo1) >= $estacionamento->vagas_tipo1) {
+        //         return redirect('/erro', compact('mensagem', 'Todas as vagas de carro para este dia estão ocupadas!'));
+        //     }
+
+        //     if(count($vagas_agendadas->vaga_tipo2) >= $estacionamento->vagas_tipo2) {
+        //         return redirect('/erro', compact('mensagem', 'Todas as vagas de moto  para este dia estão ocupadas!'));
+        //     }
+        // }
+
+        
         $vaga = Vaga::create($request->all());
+
         $request->session()
             ->flash(
                 'mensagem',
-                "Vaga agendada com sucesso"
+                "Agendamento feito com sucesso!"
             );
 
         return redirect('/vagas');

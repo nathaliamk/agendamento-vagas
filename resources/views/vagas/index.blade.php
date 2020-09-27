@@ -71,7 +71,7 @@ body{
             <div class="card bg-c-blue order-card btn btn-dark mb-2">
                 <div class="card-block">
                     <h6 class="m-b-20">Vagas para Motos</h6>
-                    <h2 class="text-right"><i class="fa fa-motorcycle f-left"></i><span>0</span></h2>
+                    <h2 class="text-right"><i class="fa fa-motorcycle f-left"></i><span>{{ $vagas_motos }}</span></h2>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@ body{
             <div class="card bg-c-yellow order-card btn btn-dark mb-2">
                 <div class="card-block">
                     <h6 class="m-b-20">Vagas para Carros</h6>
-                    <h2 class="text-right"><i class="fa fa-car f-left"></i><span>0</span></h2>
+                    <h2 class="text-right"><i class="fa fa-car f-left"></i><span>{{ $vagas_carros }}</span></h2>
                 </div>
             </div>
         </div>
@@ -120,6 +120,9 @@ body{
         <th scope="col">Modelo</th>
         <th scope="col">Placa</th>
         <th scope="col">Data</th>
+        <th scope="col">Carro</th>
+        <th scope="col">Moto</th>
+        <th scope="col">Preferencial</th>
         <th scope="col" colspan="2">Ações</th>
         </tr>
     </thead>
@@ -131,6 +134,9 @@ body{
             <td>{{ $vaga->modelo }}</td>
             <td>{{ $vaga->placa }}</td>
             <td>{{ date( 'd/m/Y' , strtotime($vaga->data))}}</td>
+            <td><input type="checkbox" name="vagas_tipo1"></td>
+            <td><input type="checkbox" name="vagas_tipo2"></td>
+            <td><input type="checkbox" name="vagas_tipo3"></td>
             <td>
             <form method="post" action="/vagas/{{ $vaga->id }}"
                 onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($vaga->nome) }}?')">
@@ -145,6 +151,7 @@ body{
     @endforeach
     </table>
 </div>
+
 
 <!-- <ul class="list-group">
     @foreach($vagas as $vaga)

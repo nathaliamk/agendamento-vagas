@@ -146,8 +146,8 @@ body{
             <td>{{ $vaga->modelo }}</td>
             <td>{{ $vaga->placa }}</td>
             <td>{{ date( 'd/m/Y' , strtotime($vaga->data))}}</td>
-            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fa fa-refresh f-left"></i><span></span></button></p></td>
-            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fa fa-refresh f-left"></i><span></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil" aria-hidden="true"></i></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></p></td>
             </tr>
         </tbody>
         @endforeach
@@ -165,13 +165,16 @@ body{
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Tiger Nixon">
+                    <input class="form-control " type="text" placeholder="Nome">
                 </div>
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="System Architect">
+                <input class="form-control " type="text" placeholder="Modelo">
             </div>
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="Edinburgh">
+                <input class="form-control " type="text" placeholder="Placa">
+            </div>
+            <div class="form-group">
+                <input class="form-control " type="date" placeholder="">
             </div>
         </div>
         <div class="modal-footer">

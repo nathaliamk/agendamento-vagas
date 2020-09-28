@@ -62,6 +62,8 @@ body{
 .f-right {
     float: right;
 }
+
+
   </style>
 </head>
 <body>
@@ -112,7 +114,98 @@ body{
     </div>
 @endif
 <a href="/vagas/criar" class="btn btn-dark mb-2">Adicionar</a>
-    <table class="table table-hover">
+
+<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Data</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+            <th>#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Data</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </tfoot>
+        @foreach($vagas as $vaga)
+        <tbody>
+            <tr>
+            <th scope="row">{{ $vaga->id }}</th>
+            <td>{{ $vaga->nome }}</td>
+            <td>{{ $vaga->modelo }}</td>
+            <td>{{ $vaga->placa }}</td>
+            <td>{{ date( 'd/m/Y' , strtotime($vaga->data))}}</td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fa fa-refresh f-left"></i><span></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fa fa-refresh f-left"></i><span></span></button></p></td>
+            </tr>
+        </tbody>
+        @endforeach
+        </table>
+    	</div>
+	</div>
+</div>
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title custom_align" id="Heading">Edite seu item</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Tiger Nixon">
+                </div>
+            <div class="form-group">
+                <input class="form-control " type="text" placeholder="System Architect">
+            </div>
+            <div class="form-group">
+                <input class="form-control " type="text" placeholder="Edinburgh">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Atualizar</button>
+        </div>
+    </div>
+<!-- /.modal-content --> 
+</div>
+<!-- /.modal-dialog --> 
+</div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <h4 class="modal-title custom_align" id="Heading">Excluir item</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>Tem certeza que deseja remover?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Não</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+</body>
+
+<!-- <table class="table table-hover">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -149,7 +242,7 @@ body{
         </tr>
     </tbody>
     @endforeach
-    </table>
+    </table> -->
 </div>
 
 
@@ -171,3 +264,13 @@ body{
 </body>
 </html>
 @endsection
+
+<script>
+$(document).ready(function() {
+    $('#datatable').dataTable();
+    
+     $("[data-toggle=tooltip]").tooltip();
+    
+} );
+
+</script>

@@ -13,6 +13,18 @@
     </div>
 @endif
 
+<style>
+.container2{
+    border: 1px solid #ccc;
+    background-color: #e9ecef;
+    padding: 50px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 0 auto;
+}
+</style>
+
+<div class="container2">
     <form method="post">
         @csrf
         <div class="form-group">
@@ -33,4 +45,6 @@
             Registrar-se
         </a>
     </form>
+</div>
+
 @endsection

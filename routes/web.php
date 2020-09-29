@@ -25,3 +25,8 @@ Route::post('/entrar', 'EntrarController@entrar');
 // Somente admin tem o acesso
 Route::get('/registro', 'RegistroController@create');
 Route::post('/registro', 'RegistroController@store');
+
+Route::get('/sair', function () {
+    Auth::logout();
+    return redirect('/entrar');
+});

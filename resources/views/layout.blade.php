@@ -92,16 +92,17 @@ body {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-dark navbar-offcanvas" style="background-color: #155592;">
+    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-dark navbar-offcanvas d-flex justify-content-between" style="background-color: #155592;">
 
     <button class="navbar-toggler d-block" type="button" id="navToggle">
         <span class="navbar-toggler-icon"><a class="navbar-brand mr-auto" href="#"></a></span>
     </button>
+    <a href="/sair" class="text-light">Sair</a>
 
     <div class="navbar-collapse offcanvas-collapse ">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/vagas">Início <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Notificações</a>
@@ -112,6 +113,7 @@ body {
             <li class="nav-item">
                 <a class="nav-link" href="#">Perfil</a>
             </li>
+            
         </ul>
     </div>
 

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-    Entrar
+    Bem-vindo
 @endsection
 
 @section('conteudo')
@@ -19,13 +19,18 @@
     background-color: #e9ecef;
     padding: 50px;
     border-radius: 10px;
-    width: 50%;
+    width: 400px;
     margin: 0 auto;
+}
+h3{
+    text-align: center;
+    padding: 10px;
 }
 </style>
 
 <div class="container2">
     <form method="post">
+        <h3>Acesso ao sistema</h3>
         @csrf
         <div class="form-group">
             <label for="email">E-mail</label>

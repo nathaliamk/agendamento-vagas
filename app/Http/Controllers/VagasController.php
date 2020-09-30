@@ -118,6 +118,7 @@ class VagasController extends Controller
         //     }
         // }
 
+        // TODO: verificar se array_key_exists esta em uso ou se ficou depreciado
         if(!array_key_exists('estacionamento_id',$request)){
             // redirecionamento para pagina de erros
         }

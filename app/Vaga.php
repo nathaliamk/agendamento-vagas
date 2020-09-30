@@ -8,6 +8,7 @@ class Vaga extends Model
 {
     protected $fillable = [
         'nome',
+        'estacionamento_id',
         'modelo',
         'placa',
         'data'

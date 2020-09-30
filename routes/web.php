@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/vagas', 'VagasController@index')
-->name('listar_vagas');
+Route::get('/vagas', 'VagasController@index')->name('listar_vagas');
 Route::get('/vagas/criar', 'VagasController@create');
 Route::post('/vagas/criar', 'VagasController@store');
 Route::delete('/vagas/{id}', 'VagasController@destroy');

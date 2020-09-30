@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Estacionamento extends Model
 {
     protected $table = "estacionamento";
+    // protected $fillable = ['','','',''];
 }

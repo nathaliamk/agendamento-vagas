@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vaga extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [
         'nome',
         'estacionamento_id',
@@ -14,6 +17,9 @@ class Vaga extends Model
         'data'
     ];
 
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
     public function estacionamento() 

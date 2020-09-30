@@ -11,7 +11,9 @@ class Estacionamento extends Model
      */
     protected $table = "estacionamento";
 
+
     /**
+     * Verificar se a ao chamar a model as informações estão vindo correta
      * @var array
      */
     protected $fillable = [
@@ -20,4 +22,5 @@ class Estacionamento extends Model
         'vagas_tipo2',
         'vagas_tipo3'
     ];
+
 }

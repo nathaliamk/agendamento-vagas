@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Vaga extends Model
 {
     /**
+     * Adiconar a chave entrangeira para realizar a inserção no banco
+     * Chave estangeira estacionamento_id
      * @var array
      */
     protected $fillable = [

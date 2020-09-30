@@ -119,7 +119,7 @@ class VagasController extends Controller
         // }
 
         // TODO: verificar se array_key_exists esta em uso ou se ficou depreciado
-        if(!array_key_exists('estacionamento_id',$request)){
+        if(!isset($request['estacionamento_id'])){
             // redirecionamento para pagina de erros
         }
         $vaga = Vaga::create($request->all());

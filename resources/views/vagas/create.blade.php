@@ -28,12 +28,12 @@ Solicitar agendamento
         <label for="placa">Placa</label>
         <input type="text" class="form-control" name="placa" id="placa">
       </div>
-      <label for="data">Tipos de vagas</label>
+      <!-- <label for="data">Tipos de vagas</label> -->
       <!-- <select class="form-control">
         <option>Selecione</option>
-        <option>Carro</option>
-        <option>Moto</option>
-        <option>Preferencial</option>
+        <option name="vagas_tipo1">Carro</option>
+        <option name="vagas_tipo2">Moto</option>
+        <option name="vagas_tipo3">Preferencial</option>
       </select> -->
       <div class="form-group">
         <label for="data">Data</label>

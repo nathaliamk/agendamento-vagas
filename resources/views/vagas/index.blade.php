@@ -62,9 +62,17 @@ body{
 .f-right {
     float: right;
 }
+</style>
+<script>
+$(document).ready(function() {
+    $('#controle-vagas').dataTable();
+    
+     $("[data-toggle=tooltip]").tooltip();
+} );
 
-
-  </style>
+</script>
+<script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
 </head>
 <body>
 <div class="container">
@@ -115,7 +123,7 @@ body{
 @endif
 <a href="/vagas/criar" class="btn btn-dark mb-2">Adicionar</a>
 
-<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="controle-vagas" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>#</th>
@@ -268,12 +276,3 @@ body{
 </html>
 @endsection
 
-<script>
-$(document).ready(function() {
-    $('#datatable').dataTable();
-    
-     $("[data-toggle=tooltip]").tooltip();
-    
-} );
-
-</script>

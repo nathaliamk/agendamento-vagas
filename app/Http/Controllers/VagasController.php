@@ -37,11 +37,15 @@ class VagasController extends Controller
         //pega as informações do Estacionamento
         //TODO: extrair para um método privado auxiliar
         $estacionamentos = Estacionamento::first();
-
+        // Verificar se existe estacionameto para que nao haja problemas ao realizar as chamas da view
+        if($estacionamentos == null){
+            //TODO: Colocar um view funcional
+            return view('/'); 
+        }
+        
         $vagas_estacionamento = $estacionamentos->total_vagas;
         $vagas_carros = $estacionamentos->vagas_tipo1;
         $vagas_motos = $estacionamentos->vagas_tipo2;
-
 
         $vagas_disponiveis = $vagas_estacionamento - $vagas_reservadas_no_dia;
         $vagas_reservadas = $vagas_reservadas_no_dia;
@@ -75,12 +79,19 @@ class VagasController extends Controller
     //grava um agendamento, não uma vaga!
     public function store(Request $request)
     {
+        
         $request->validate([
-            'nome' =>  'required'
-            // 'modelo' =>  'required',
-            // 'placa' =>  'required'
-            // 'data' =>  'required',
+            // Pode colocar o estacionamento ID aqui como requerido, porem tem que vir junto com o formulario
+            'nome' =>  'required',
+            'modelo' =>  'required',
+            'placa' =>  'required',
+            'data' =>  'required'
         ]);
+
+        // TODO: Verificar item abaixo (Fazer que o ID venha pelo request ou uma procura e adicionar aos valores que irão para o banco e sempre verificar se ele é existente)
+        $request['estacionamento_id'] = 1;
+
+        // dd($request->all());
         
         //TODO
         //se o usuário entrar com uma data...
@@ -93,7 +104,7 @@ class VagasController extends Controller
         //     $vagas_agendadas = Vaga::where('data', $request->data);
         //     $estacionamento = Estacionamento::first();
             
-        //     if(count($vagas_agendadas) >= $estacionamento->total_vagas)
+        //     if(count($vagas_agendadas) >= $estacionamento->total_vagas){
         //         //não  lembro se a sintaxe é essa...
         //         return redirect('/erro', compact('mensagem', 'Todas as vagas para este dia estão ocupadas!'));
         //     } 
@@ -107,9 +118,12 @@ class VagasController extends Controller
         //     }
         // }
 
-        
+        // TODO: verificar se array_key_exists esta em uso ou se ficou depreciado
+        if(!isset($request['estacionamento_id'])){
+            // redirecionamento para pagina de erros
+        }
         $vaga = Vaga::create($request->all());
-
+        
         $request->session()
             ->flash(
                 'mensagem',

@@ -155,7 +155,15 @@ $(document).ready(function() {
             <td>{{ $vaga->placa }}</td>
             <td>{{ date( 'd/m/Y' , strtotime($vaga->data))}}</td>
             <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fa fa-pencil" aria-hidden="true"></i></button></p></td>
-            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></p></td>
+            <td>
+            <form method="post" action="/vagas/{{ $vaga->id }}"
+                onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($vaga->nome) }}?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </form>
+            </td>
+            <!-- <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></p></td> -->
             </tr>
         </tbody>
         @endforeach
@@ -173,18 +181,18 @@ $(document).ready(function() {
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Nome">
+                    <input class="form-control " type="text" placeholder="{{ $vaga->nome }}">
                 </div>
-            <div class="form-group">
-                <input class="form-control " type="text" placeholder="Modelo">
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="{{ $vaga->modelo }}">
+                </div>
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="{{ $vaga->placa }}">
+                </div>
+                <div class="form-group">
+                    <input class="form-control " type="date" placeholder="{{ date( 'd/m/Y' , strtotime($vaga->data))}}">
+                </div>
             </div>
-            <div class="form-group">
-                <input class="form-control " type="text" placeholder="Placa">
-            </div>
-            <div class="form-group">
-                <input class="form-control " type="date" placeholder="">
-            </div>
-        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>Atualizar</button>
         </div>
@@ -205,10 +213,15 @@ $(document).ready(function() {
        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span>Tem certeza que deseja remover?</div>
        
       </div>
-        <div class="modal-footer ">
+        <!-- <div class="modal-footer ">
+        <form method="post" action="/vagas/{{ $vaga->id }}"
+            onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($vaga->nome) }}?')">
+            @csrf
+            @method('DELETE')
         <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span>Sim</button>
+        </form>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Não</button>
-      </div>
+      </div> -->
         </div>
     <!-- /.modal-content --> 
   </div>
@@ -253,8 +266,8 @@ $(document).ready(function() {
         </tr>
     </tbody>
     @endforeach
-    </table> -->
-</div>
+    </table>
+</div> -->
 
 
 <!-- <ul class="list-group">
